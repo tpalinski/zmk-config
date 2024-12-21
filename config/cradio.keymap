@@ -9,6 +9,12 @@
 #define HRML(k1,k2,k3,k4) &ht LGUI k1  &ht LALT k2  &ht LCTRL k3  &ht LSHFT k4
 #define HRMR(k1,k2,k3,k4) &ht RSHFT k1  &ht RCTRL k2  &ht RALT k3  &ht RGUI k4
 
+#define COLEMAK 0
+#define STRONK 1
+#define NUMBERS 2
+#define SYMBOLS 3
+#define DEBUG 4
+
 / {
     behaviors {
         ht: hold_tap {
@@ -25,8 +31,8 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
-            if-layers = <1 2>;
-            then-layer = <3>;
+            if-layers = <NUMBERS SYMBOLS>;
+            then-layer = <DEBUG>;
         };
     };
 
@@ -44,7 +50,24 @@
         //│  Z       │  X       │  C       │  V       │  B       │   │  K       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp K      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt 2 TAB   &kp ENTER     &kp SPACE  &lt 1 BSPC
+                                            &lt SYMBOLS TAB &kp ENTER   &kp SPACE  &lt NUMBERS BSPC
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+        t
+        fancy_layer {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│  F       │  D       │  L       │  B       │  V       │   │  J       │  G       │  O       │  U       │  , <       │
+            &kp F      &kp D      &kp L      &kp B      &kp V          &kp J      &kp G      &kp O      &kp U      &kp COMMA
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  S       │  T       │  R       │  N       │  K       │   │  Y       │  M       │  A       │  E       │   I      │
+            HRML(S,        T,         R,         N)     &kp K          &kp Y      HRMR(M,        A,         E,        I)
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  Z       │  Q       │  X       │  H       │  P       │   │  W       │  C       │ ' "      │ ; :      │ . >      │
+            &kp Z      &kp Q      &kp X      &kp H      &kp P          &kp W      &kp C      &kp SQT   &kp SEMI    &kp DOT
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                            &lt SYMBOLS TAB   &kp ENTER     &kp SPACE  &lt NUMBERS BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
@@ -90,7 +113,7 @@
            &sys_reset  &trans     &trans     &trans    &bt BT_SEL 0    &trans     &trans     &trans     &trans    &sys_reset
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│BOOTLOADER│          │          │ COLEMAK  │PROFILE 1 │   │          │  STRONK  │          │          │BOOTLOADER│
-          &bootloader  &trans     &trans     &tog 0    &bt BT_SEL 1    &trans     &tog 4     &trans     &trans    &bootloader
+          &bootloader  &trans     &trans     &tog COLEMAK &bt BT_SEL 1    &trans     &tog STRONK &trans &trans    &bootloader
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │ CLEAR BT │PROFILE 2 │   │          │          │          │          │          │
             &trans     &trans     &trans    &bt BT_CLR &bt BT_SEL 2    &trans     &trans     &trans     &trans     &trans
@@ -100,21 +123,5 @@
             >;
         };
             
-        fancy_layer {
-            bindings = <
-        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│  F       │  D       │  L       │  B       │  V       │   │  J       │  G       │  O       │  U       │  , <       │
-            &kp F      &kp D      &kp L      &kp B      &kp V          &kp J      &kp G      &kp O      &kp U      &kp COMMA
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  S       │  T       │  R       │  N       │  K       │   │  Y       │  M       │  A       │  E       │   I      │
-            HRML(S,        T,         R,         N)     &kp K          &kp Y      HRMR(M,        A,         E,        I)
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  Z       │  Q       │  X       │  H       │  P       │   │  W       │  C       │ ' "      │ ; :      │ . >      │
-            &kp Z      &kp Q      &kp X      &kp H      &kp P          &kp W      &kp C      &kp SQT   &kp SEMI    &kp DOT
-        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt 2 TAB   &kp ENTER     &kp SPACE  &lt 1 BSPC
-        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
-            >;
-        };
     };
 };
