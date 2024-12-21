@@ -31,8 +31,8 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
-            if-layers = <NUMBERS SYMBOLS>;
-            then-layer = <DEBUG>;
+            if-layers = <2 3>;
+            then-layer = <4>;
         };
     };
 
@@ -50,7 +50,7 @@
         //│  Z       │  X       │  C       │  V       │  B       │   │  K       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp K      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt SYMBOLS TAB &kp ENTER   &kp SPACE  &lt NUMBERS BSPC
+                                            &lt 3 TAB &kp ENTER         &kp SPACE  &lt 2 BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
@@ -67,7 +67,7 @@
         //│  Z       │  Q       │  X       │  H       │  P       │   │  W       │  C       │ ' "      │ ; :      │ . >      │
             &kp Z      &kp Q      &kp X      &kp H      &kp P          &kp W      &kp C      &kp SQT   &kp SEMI    &kp DOT
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt SYMBOLS TAB   &kp ENTER     &kp SPACE  &lt NUMBERS BSPC
+                                            &lt 3 TAB   &kp ENTER       &kp SPACE  &lt 2 BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
@@ -113,7 +113,7 @@
            &sys_reset  &trans     &trans     &trans    &bt BT_SEL 0    &trans     &trans     &trans     &trans    &sys_reset
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│BOOTLOADER│          │          │ COLEMAK  │PROFILE 1 │   │          │  STRONK  │          │          │BOOTLOADER│
-          &bootloader  &trans     &trans     &tog COLEMAK &bt BT_SEL 1    &trans     &tog STRONK &trans &trans    &bootloader
+          &bootloader  &trans     &trans     &tog 0    &bt BT_SEL 1    &trans     &tog 1      &trans     &trans    &bootloader
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │ CLEAR BT │PROFILE 2 │   │          │          │          │          │          │
             &trans     &trans     &trans    &bt BT_CLR &bt BT_SEL 2    &trans     &trans     &trans     &trans     &trans
@@ -122,6 +122,5 @@
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
-            
     };
 };
