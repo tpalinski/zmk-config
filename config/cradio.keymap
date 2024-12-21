@@ -96,7 +96,7 @@
            &sys_reset  &trans     &trans     &trans    &bt BT_SEL 0    &trans     &trans     &trans     &trans    &sys_reset
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│BOOTLOADER│          │          │ COLEMAK  │PROFILE 1 │   │          │  STRONK  │          │          │BOOTLOADER│
-          &bootloader  &trans     &trans     &tog 0    &bt BT_SEL 1    &trans     &tog 3     &trans     &trans    &bootloader
+          &bootloader  &trans     &trans     &to 0    &bt BT_SEL 1    &trans     &to 3     &trans     &trans    &bootloader
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │ CLEAR BT │PROFILE 2 │   │          │          │          │          │          │
             &trans     &trans     &trans    &bt BT_CLR &bt BT_SEL 2    &trans     &trans     &trans     &trans     &trans
